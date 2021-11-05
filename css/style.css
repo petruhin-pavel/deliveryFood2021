@@ -439,6 +439,10 @@ button {
     padding: 40px 45px;
 }
 
+.modal-dialog input::placeholder{
+    color: red;
+}
+
 .modal-dialog-auth {
     width: auto;
     position: relative;

@@ -29,6 +29,27 @@ const logout = () => {
   localStorage.removeItem('user')
 }
 
+const validateForm = () => {
+  const user = {
+    login: inputLogin.value,
+    password: inputPassword.value
+  }
+
+  localStorage.setItem('user', JSON.stringify(user))
+
+  if (inputLogin.value == ''){
+    //alert('Введите Ваш логин')
+    inputLogin.placeholder = 'Введите Ваш логин'
+    inputLogin.style.border = '1px solid red'
+  }else if (inputPassword.value == ''){
+    inputPassword.style.border = '1px solid red'
+    inputPassword.placeholder = 'Введите Ваш пароль'
+  } else {
+    login(user);
+  }
+}
+
+
 buttonAuth.addEventListener('click', () => {
   modalAuth.style.display = 'flex'
 })
@@ -44,14 +65,17 @@ buttonOut.addEventListener('click', () => {
 logInForm.addEventListener('submit', (event) => {
   event.preventDefault()
 
-  const user = {
+  /* const user = {
     login: inputLogin.value,
     password: inputPassword.value
   }
 
-  localStorage.setItem('user', JSON.stringify(user))
+  localStorage.setItem('user', JSON.stringify(user)) */
 
-  login(user);
+  
+
+  validateForm();
+  //login(user);
 })
 
 if (localStorage.getItem('user')){
