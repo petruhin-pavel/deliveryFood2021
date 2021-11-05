@@ -42,8 +42,9 @@ const validateForm = () => {
     inputLogin.placeholder = 'Введите Ваш логин'
     inputLogin.style.border = '1px solid red'
   }else if (inputPassword.value == ''){
-    inputPassword.style.border = '1px solid red'
     inputPassword.placeholder = 'Введите Ваш пароль'
+    inputPassword.style.border = '1px solid red'
+    inputLogin.style.border = '1px solid black'
   } else {
     login(user);
   }
