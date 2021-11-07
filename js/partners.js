@@ -1,7 +1,43 @@
+const cardsRestaurants = document.querySelector('.cards-restaurants');
+
 const renderItems = (data) => {
-  //console.log(data);
-  data.forEach((elem) => {
-    console.log(elem);
+  data.forEach((item) => { // data.forEach(({ image, kitchen, name, price, products, stars, time_of_delivery }) => {
+    const { image, kitchen, name, price, products, stars, time_of_delivery } = item
+    const a = document.createElement('a')
+
+
+    a.setAttribute('href', '/restaurant.html')
+    a.classList.add('card')
+    a.classList.add('card-restaurant')
+    a.dataset.products = products
+
+    a.innerHTML = `
+    <img src="${image}" alt="${name}" class="card-image" />
+			<div class="card-text">
+				<div class="card-heading">
+					<h3 class="card-title">${name}</h3>
+					<span class="card-tag tag">${time_of_delivery} мин</span>
+				</div>
+				<div class="card-info">
+					<div class="rating">
+						${stars}
+					</div>
+					<div class="price">От ${price} ₽</div>
+					<div class="category">${kitchen}</div>
+				</div>
+			</div>
+    `
+    // отменили переход по ссылке, записали данные в локальное хранилище и перешли по ссылке
+    a.addEventListener('click', (Event) => {
+      Event.preventDefault()
+
+      localStorage.setItem('restaurant', JSON.stringify(item))
+
+      window.location.href = '/restaurant.html'
+
+    })
+
+    cardsRestaurants.append(a)
   })
 }
 
@@ -71,4 +107,32 @@ fetch('./db/partners.json')
 
 Метод finally() отработает в любом случае, успех\ошибка
 .finally(console.log('finally'))
+Метод createElement() создает объект\тег но не выводит его (держит в памяти)
+const a = document.createElement('a')
+console.log(a);
+Метод setAttribute() позволяет работать с атребутами элементов\тегов
+a.setAttribute('href', '/restaurant.html') - добавляет атребут
+a.getAttribute('href') - возвращает значение атребута
+a.hasAttribute('href') - возвращает булевое значение, существует ли данный атребут у элемента\тега
 */
+/*
+Свойство classList позволяет работать с классами
+letORconst.classList.add('new-class') - добавление класса
+letORconst.classList.remove('new-class') - удаление класса
+letORconst.classList.toggle('new-class') - если данный клас не найден - добавляет класс, если найден - удаляет
+ */
+/*
+Свойство innerHTML
+a.innerHTML = "<span>Это некий контент</span>"
+*/
+/*
+Деструктуризация позволяет обращаться к свойствам объекта напрямую {перечисление свойств элемента}
+const {image, kitchen, name, price, products, stars, time_of_delivery} = item
+
+*/
+/*
+.dataset свойство позволяющее работать с дата атребутами
+a.dataset.products = products
+*/
+/* Добавление верстки
+cardsRestaurants.append(a) */
