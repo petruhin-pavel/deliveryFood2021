@@ -115,6 +115,12 @@ a.setAttribute('href', '/restaurant.html') - добавляет атребут
 a.getAttribute('href') - возвращает значение атребута
 a.hasAttribute('href') - возвращает булевое значение, существует ли данный атребут у элемента\тега
 */
+
+/*
+Метод push() записывает элемент в массив
+cartArray.push(cartItem)
+*/
+
 /*
 Свойство classList позволяет работать с классами
 letORconst.classList.add('new-class') - добавление класса

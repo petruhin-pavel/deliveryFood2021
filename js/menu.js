@@ -1,4 +1,5 @@
 const cardsMenu = document.querySelector('.cards-menu')
+const cartArray = []
 
 const changeTitle = (restaurant) => {
   const restaurantTitle = document.querySelector('.restaurant-title')
@@ -13,7 +14,14 @@ const changeTitle = (restaurant) => {
   price.innerHTML = `
   От ${restaurant.price} ₽
   `
-  console.log(restaurant);
+}
+
+const addToCart = (cartItem) => {
+  // проверяем есть ли объект в корзине
+  if (cartArray)
+    cartArray.push(cartItem)
+
+  localStorage.setItem('cart', JSON.stringify(cartArray))
 }
 
 const renderItems = (data) => {
@@ -40,6 +48,20 @@ const renderItems = (data) => {
 				</div>
 			</div>
     `
+    // обработка нажатия кнопки "в корзину"
+    card.querySelector('.button-card-text').addEventListener('click', () => {
+      /* const cartItem = {
+        name: name, //если ключ и содержимое совпадает просто пишем name
+        price: price,
+        count: 1
+      }
+      addToCart(cartItem) */
+
+      // аналог, короткая запись
+      addToCart({ name, price, id, count: 1 })
+
+    })
+
     cardsMenu.append(card)
   })
 }
